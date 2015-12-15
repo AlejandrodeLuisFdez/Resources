@@ -1,306 +1,226 @@
-$(window).on('load', function() {
+//Se dispara cuando todo el DOM e imagenes están cargadas
 
-});
+    $(window).on('load', function() {
 
-$('.grid-item').on('click', function() {
-    $('this')
-});
-
-$('.main-store-list').on('.click', function() {
-
-})
-$(".grid-item").click(function() {
-    // `this` is the DOM element that was clicked
-    var index = $(".grid-item").index(this)
-    var index_GTM = index + 1
-    alert(index_GTM)
-});
-
-
-if (('.Store-Name.E4-5.home.direccion').height() >= 37) {
-    $('.Name_store.home.direccion').css('height', '70px')
-};
-
-
-$(window).onresize = function(event) {
-    resizeAddress();
-};
-
-var resizeAddress = function() {
-
-    $('.Store-Name.E4-5.home.direccion').each(function() {
-        if ($(this).height() >= 37) {
-            $(this).parent().css('height', '70px')
-        }
     });
-};
+
+//Se dispara cuando se cambia el tamaño de la Screen
+
+    $(window).onresize = function(event) {
+        resizeFunction();
+    };
+
+    var resizeFunction = function() {
+
+        $('elemento').each(function() {  //Recorre cada 'elemento'
+            if ($(this).height() >= 37) {
+                $(this).parent().css('height', '70px');
+            }
+        });
+    };
+
+//Se usó para redireccinar correctamente al click ya que Primefaces no hacía evento AJAX
+
+    //LOCAL
+    $('.go-to-publications').each(function() {
+        var clickStore = $(this).attr('onclick');
+        var initUrl = initUrl.indexOf("https");
+        var microUrl = initUrl.substr(n, x.length);
+        initUrl = microUrl.indexOf("'");
+        var siteUrl = microUrl.substr(0, n - 1);
+        $(this).attr('href', siteUrl);
+    });
+
+    //INT
+
+    $('.go-to-publications').each(function() {
+        var x = $(this).attr('onclick');
+        var n = x.indexOf("https");
+        var z = x.substr(n, x.length);
+        n = z.indexOf("'");
+        var url = z.substr(0, n - 1);
+        $(this).attr('href', url);
+    });
+
+    //PRE
+
+    $('.go-to-publications').each(function() {
+        var x = $(this).attr('onclick');
+        var n = x.indexOf("https");
+        var z = x.substr(n, x.length);
+        n = z.indexOf("'");
+        var url = z.substr(0, n - 1);
+        $(this).attr('href', url);
+    });
 
 
+    //PRO
 
-//LOCAL
-$('.go-to-publications').each(function() {
-    var clickStore = $(this).attr('onclick');
-    var initUrl = initUrl.indexOf("https");
-    var microUrl = initUrl.substr(n, x.length);
-    initUrl = microUrl.indexOf("'");
-    var siteUrl = microUrl.substr(0, n - 1);
-    $(this).attr('href', siteUrl);
-});
-
-//INT
-
-$('.go-to-publications').each(function() {
-    var x = $(this).attr('onclick');
-    var n = x.indexOf("https");
-    var z = x.substr(n, x.length);
-    n = z.indexOf("'");
-    var url = z.substr(0, n - 1);
-    $(this).attr('href', url);
-});
-
-//PRE
-
-$('.go-to-publications').each(function() {
-    var x = $(this).attr('onclick');
-    var n = x.indexOf("https");
-    var z = x.substr(n, x.length);
-    n = z.indexOf("'");
-    var url = z.substr(0, n - 1);
-    $(this).attr('href', url);
-});
-
-
-//PRO
-
-$('.go-to-publications').each(function() {
-    var x = $(this).attr('onclick');
-    var n = x.indexOf("https");
-    var z = x.substr(n, x.length);
-    n = z.indexOf("'");
-    var url = z.substr(0, n);
-    $(this).attr('href', url);
-});
-
-
-//LOCAL Wheel POSSIBLES
-
-$('.go-to-publications').each(function() {
-
-    var x = $(this).attr('onclick');
-    var n = x.indexOf("https");
-    var z = x.substr(n, x.length);
-    n = z.indexOf("'");
-    var url = z.substr(0, n - 1);
-    $(this).attr('href', url);
-});
+    $('.go-to-publications').each(function() {
+        var x = $(this).attr('onclick');
+        var n = x.indexOf("https");
+        var z = x.substr(n, x.length);
+        n = z.indexOf("'");
+        var url = z.substr(0, n);
+        $(this).attr('href', url);
+    });
 
 //Previene el uso del MouseWheel
 
-$('.go-to-publications').mousedown(function(event) {
-    var mouseWheel = (event.which)
-    if (mouseWheel == 2) {
-        event.preventDefault()
-    }
-});
-
-
-/*Cookies*/
-
-
-
-//Recoje la URL  
-$(window).on('load', function() {
-
-
-    var x = document.referrer;
-    var n = x.indexOf("/shopping");
-    var z = x.substr(n, x.length);
-
-    if (z == "/shopping/register.xhtml") {
-
-        alert('Primer paso reg OK')
-    } else {};
-
-
-});
-
-
-$('.reg-promo').height();
-$('.banner-promo').height($('.reg-promo').height() + 200)
-
-
-var mapaStoresSelected = function() {
-    var mapstores;
-    var tiendaStores = [];
-    var markers = [];
-
-    var addListenersMarkerInfo = function() {
-        google.maps.event.addListener(marker, 'click', function() {
-            closeInfoWindow();
-            this.infowindow.open(mapstores, this);
-            this.setIcon('/statics/1.0.1/images/PIN_VERDE.png');
-        });
-
-        google.maps.event.addListener(mapstores, 'click', function() {
-            closeInfoWindow();
-        });
-    };
-
-    var autoCenter = function() {
-        //  Create a new viewpoint bound
-        var bounds = new google.maps.LatLngBounds();
-        //  Go through each...
-        $.each(markers, function(index, marker) {
-            bounds.extend(marker.position);
-        });
-        //  Fit these bounds to the map
-        mapstores.fitBounds(bounds);
-    };
-
-    var closeInfoWindow = function() {
-        var curMarker = this;
-        // loop through all markers
-        $.each(markers, function(index, marker) {
-            // if marker is not the clicked marker, close the marker
-            if (marker !== curMarker) {
-                marker.infowindow.close();
-                marker.setIcon('/statics/1.0.1/images/PIN_GRIS.png');
-            }
-        });
-    };
-
-    $(".store-box").each(function(index, key) {
-        tiendaStores.push(
-            [
-                parseFloat($(this).find(".latitudes").children().val()),
-                parseFloat($(this).find(".latitudes").children().next("input").val()),
-                $(this).find('.container-logo-store').children('img').attr('src'),
-                $(this).find('.name-of-store').text(),
-                $(this).find('.direction-of-store').text(),
-                $(this).find(".latitudes").children().next("input").next("input").val(),
-                $(this).find(".latitudes").children().next("input").next("input").next("input").val(),
-                $(this).find(".latitudes").children().next("input").next("input").next("input").next("input").val()
-            ]
-        );
-    });
-    if (typeof google != 'undefined') {
-        mapstores = new google.maps.Map(document.getElementById('map-stores'), {
-            center: new google.maps.LatLng(40.425214, -3.7123485),
-            scrollwheel: false,
-            zoom: 20,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        });
-
-        var infowindow;
-        var marker, i;
-
-        for (i = 0; i < tiendaStores.length; i++) {
-            var tienda = {
-                lat: tiendaStores[i][0],
-                lng: tiendaStores[i][1],
-                logo: tiendaStores[i][2],
-                name: tiendaStores[i][3],
-                address: tiendaStores[i][4],
-                number: tiendaStores[i][5],
-                hour: tiendaStores[i][6],
-                urlMicrosite: tiendaStores[i][7]
-            };
-            if (marker = new google.maps.Marker)({
-                position: new google.maps.LatLng(tienda.lat, tienda.lng),
-                map: mapstores,
-                infowindow: infowindow,
-                icon: '/statics/1.0.1/images/PIN_GRIS.png',
-            });
-
-            markers.push(marker);
-            addListenersMarkerInfo();
+    $('elemento').mousedown(function(event) {
+        var mouseWheel = (event.which);
+        if (mouseWheel == 2) {
+            event.preventDefault();
         }
-        autoCenter();
-    }
-};
+    });
 
-$(".container-icon-voucher").parent().each(function() {
-    if ($(this).children().size() > 1) {
-        $(this).html($(this).children().first());
-    }
-});
-$(".Buttons-categories").parents(".container-store-data.home").each(function() {
-    $(this).height
-});
+//Recoje documentReferrer si es mediante un LINK  
+    $(window).on('load', function() {
+        var x = document.referrer;
+        var n = x.indexOf("/shopping");
+        var z = x.substr(n, x.length);
+        if (z == "/shopping/register.xhtml") {
+            alert('Primer paso reg OK');
+        } else {}
+    });
 
+//Setea la altura del elemento con la del elemento2 más 200px
 
+    $('elemento').height($('elemento2').height() + 200);
 
+//Creación de Mapa GoogleMaps
 
+    var mapaStoresSelected = function() {
+        var mapstores; //Declaramos el mapa
+        var tiendaStores = []; //Declaramos los elementos a integrar en el mapa
+        var markers = []; //Declaramos los markers o POIs
 
-//Script para detectar SO Mobile
-var isMobile = {
-    Android: function() {
-        return navigator.userAgent.match(/Android/i);
-    },
-    BlackBerry: function() {
-        return navigator.userAgent.match(/BlackBerry/i);
-    },
-    iOS: function() {
-        return navigator.userAgent.match(/iPhone|iPad|iPod/i);
-    },
-    Opera: function() {
-        return navigator.userAgent.match(/Opera Mini/i);
-    },
-    Windows: function() {
-        return navigator.userAgent.match(/IEMobile/i);
-    },
-    any: function() {
-        return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
-    }
-};
-//Modificador por alturas
-$(".name-of-store-app").each(function() {
-    if ($(this).height() > 34) {
-
-        $(this).css('text-align', 'left');
-        $(this).css('bottom', '10px');
-        $(this).css('left', '71px');
-        $(this).css('line-height', '1');
-    }
-});
-//Envio de Push Web
-$('.name-of-store-app').on('click', function() {
-    if (window.Notification && Notification.permission !== "denied") {
-        Notification.requestPermission(function(status) { // status is "granted", if accepted by user
-            var n = new Notification(tiendaPush.name, {
-                body: 'Gracias por aceptar el servicio de notificaciones Push de Yaap shopping',
-                icon: tiendaPush.logo // optional
+        var addListenersMarkerInfo = function() { //Añade la funcionalidad al clickar en un POI
+            google.maps.event.addListener(marker, 'click', function() {
+                closeInfoWindow(); //Cierra cualquier InfoWindow abiero
+                this.infowindow.open(mapstores, this); //Abre el InfoWindow seleccionad
+                this.setIcon('/statics/1.0.1/images/PIN_VERDE.png');//Configura el ICONO de POI clickado
             });
+
+            google.maps.event.addListener(mapstores, 'click', function() { //Si clickas fuera del InfoWindow se cierra
+                closeInfoWindow();
+            });
+        };
+
+        // Función para Centrar el mapa
+        var autoCenter = function() {
+            //  Create a new viewpoint bound
+            var bounds = new google.maps.LatLngBounds();
+            //  Go through each...
+            $.each(markers, function(index, marker) {
+                bounds.extend(marker.position);
+            });
+            //  Fit these bounds to the map
+            mapstores.fitBounds(bounds);
+        };
+
+        var closeInfoWindow = function() {
+            var curMarker = this;
+            // loop through all markers
+            $.each(markers, function(index, marker) {
+                // if marker is not the clicked marker, close the marker
+                if (marker !== curMarker) {
+                    marker.infowindow.close();
+                    marker.setIcon('/statics/1.0.1/images/PIN_GRIS.png');
+                }
+            });
+        };
+        //Recorre elemento y crea un Array del que sacar datos
+        $("elemento").each(function(index, key) {
+            tiendaStores.push(
+                [
+                    parseFloat($(this).find(".latitudes").children().val()),//[0]
+                    parseFloat($(this).find(".latitudes").children().next("input").val()),//[1]
+                    $(this).find('.container-logo-store').children('img').attr('src'),//[2]
+                    $(this).find('.name-of-store').text(),//[3]
+                    $(this).find('.direction-of-store').text(),//[4]
+                    $(this).find(".latitudes").children().next("input").next("input").val(),//[5]
+                    $(this).find(".latitudes").children().next("input").next("input").next("input").val(),//[6]
+                    $(this).find(".latitudes").children().next("input").next("input").next("input").next("input").val()//[7]
+                ]
+            );
         });
-    }
-});
+        //Se crea el mapa en el DOM
+        if (typeof google != 'undefined') {
+            mapstores = new google.maps.Map(document.getElementById('map-stores'), {
+                center: new google.maps.LatLng(40.425214, -3.7123485),//Se centra en coordenadas
+                scrollwheel: false,//Anula RuedaCentral
+                zoom: 20,
+                mapTypeId: google.maps.MapTypeId.ROADMAP //Tipo de Mapa
+            });
 
-//Cookies
+            var infowindow;
+            var marker, i;
 
-/*$(document).ready(function() {ProductSize
-    var checkPromotionSecond = $("#checkPromoSecond").val();
-    var interval = setInterval(function() {
-               
-                var maxHeight = 0;
-
-                 $('.container-store-data').each(function() {
-                    if ($(this).height() > maxHeight) {
-                        maxHeight = $(this).height();
-                    }
+            //Recorremos el objeto de tiendaStore y ponemos alias
+            for (i = 0; i < tiendaStores.length; i++) {
+                var tienda = {
+                    lat: tiendaStores[i][0],
+                    lng: tiendaStores[i][1],
+                    logo: tiendaStores[i][2],
+                    name: tiendaStores[i][3],
+                    address: tiendaStores[i][4],
+                    number: tiendaStores[i][5],
+                    hour: tiendaStores[i][6],
+                    urlMicrosite: tiendaStores[i][7]
+                };
+                marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(tienda.lat, tienda.lng),
+                    map: mapstores,
+                    infowindow: infowindow,
+                    icon: '/statics/1.0.1/images/PIN_GRIS.png'
                 });
 
-                 $('.container-store-data').height(maxHeight);
+                markers.push(marker);
+                addListenersMarkerInfo();
             }
+            autoCenter();
+        }
+    };
+
+//Script para detectar SO Mobile
+    var isMobile = {
+        Android: function() {
+            return navigator.userAgent.match(/Android/i);
         },
-        200);
-});*/
+        BlackBerry: function() {
+            return navigator.userAgent.match(/BlackBerry/i);
+        },
+        iOS: function() {
+            return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+        },
+        Opera: function() {
+            return navigator.userAgent.match(/Opera Mini/i);
+        },
+        Windows: function() {
+            return navigator.userAgent.match(/IEMobile/i);
+        },
+        any: function() {
+            return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+        }
+    };
+
+//Envio de Push Web
+    $('elemento').on('click', function() {
+        if (window.Notification && Notification.permission !== "denied") {
+            Notification.requestPermission(function(status) { // status is "granted", if accepted by user
+                var n = new Notification(tiendaPush.name, {
+                    body: 'Gracias por aceptar el servicio de notificaciones Push',
+                    icon: url // optional
+                });
+            });
+        }
+    });
+
+//Formulario NewProduct
 
 
-$('.StockPerSize').val()
-ProductSize
-addMoreSizes
 
-//Alex
 	var BlockSizeStock = $('.containerStockSize').html();
 
 	 $('.addMoreSizes').parent().each(function(){
@@ -323,27 +243,11 @@ addMoreSizes
     	});
 
 
-    };
-
-    	$( "input[name='quantity']").each(function(index){ alert($(this).val()); });
-	$( "input[name='quantity']").each(function(index){ alert($(this).val()); });
-
-
-if ($('.name-of-store-app').height() > 34){
-	$(this).css('font-size','18px')
-}
-
-
-
-$('.nameStoreMap').each(function() {
-    if ($(this).height() > 33) {
-		$(this).css('font-size','100%')
     }
-});
 
-$('.storeTags').each(function(){
-						if($(this).height() > 20){
-							$(this).children('.tags').css('font-size','90%');
-						}
+//Selecciona por Attr "Name" 
+    	$( "input[name='foo']").each(function(index){
+            alert($(this).val());
+        });
 
-			}, 200);
+
